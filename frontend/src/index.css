@@ -1,0 +1,20 @@
+:root {
+  font-family: 'Trebuchet MS', 'Segoe UI', Tahoma, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 10% 10%, rgba(93, 155, 172, 0.4), transparent 42%),
+    radial-gradient(circle at 90% 90%, rgba(120, 179, 162, 0.45), transparent 40%),
+    linear-gradient(160deg, #22383f 0%, #101b1f 60%, #0b1418 100%);
+}
+
+#root {
+  min-height: 100vh;
+}

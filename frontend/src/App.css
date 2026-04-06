@@ -1,0 +1,90 @@
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.calculator {
+  width: min(100%, 380px);
+  background: rgba(16, 25, 31, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 22px;
+  box-shadow: 0 24px 40px rgba(8, 11, 14, 0.4);
+  padding: 18px;
+  backdrop-filter: blur(12px);
+}
+
+.display {
+  background: rgba(6, 9, 12, 0.55);
+  color: #f5f8f9;
+  min-height: 84px;
+  border-radius: 14px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-bottom: 16px;
+  overflow-x: auto;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.key {
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 120ms ease, filter 120ms ease;
+  color: #0f181b;
+  background: #e8edf0;
+}
+
+.key:hover {
+  filter: brightness(1.05);
+}
+
+.key:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.key-number {
+  background: #e8edf0;
+}
+
+.key-action {
+  background: #f2c5ba;
+}
+
+.key-operator {
+  background: #c1d8e2;
+}
+
+.key-equals {
+  background: #7dd3c7;
+}
+
+@media (max-width: 480px) {
+  .app-shell {
+    padding: 12px;
+  }
+
+  .calculator {
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .key {
+    padding: 12px 8px;
+    font-size: 0.95rem;
+  }
+}

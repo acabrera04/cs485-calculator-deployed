@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 
-const API_BASE_URL = 'http://localhost:3001'
+const CALCULATE_API_URL =
+  import.meta.env.VITE_CALCULATE_API_URL ?? 'http://localhost:3001/calculate'
 
 const BUTTONS = [
   'Clear',
@@ -162,7 +163,7 @@ function App() {
       setIsCalculating(true)
       try {
         const normalizedExpression = expression.replace(/x/g, '*').replace(/÷/g, '/')
-        const response = await fetch(`${API_BASE_URL}/calculate`, {
+        const response = await fetch(CALCULATE_API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ expression: normalizedExpression }),

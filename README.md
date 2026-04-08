@@ -38,7 +38,8 @@ Prerequisites:
 
 - AWS CLI configured
 - CDK bootstrap permissions in the target account
-- GitHub token with `repo` scope for Amplify Hosting
+- The Amplify GitHub App installed for the target AWS region
+- A GitHub personal access token with `admin:repo_hook` for the Amplify GitHub App flow
 
 Install the CDK dependencies:
 
@@ -54,14 +55,18 @@ cd infra
 npm run bootstrap
 ```
 
-Deploy the stack. This example uses the current GitHub auth token and points Amplify at the current branch:
+Install the regional Amplify GitHub App before the first deployment. For `us-east-2`, the install URL is:
+
+```text
+https://github.com/apps/aws-amplify-us-east-2/installations/new
+```
+
+Deploy the stack with the GitHub App flow:
 
 ```bash
 cd infra
-CURRENT_BRANCH="$(git -C .. branch --show-current)"
-npm run deploy -- \
-  --parameters AmplifyGitHubToken="$(gh auth token)" \
-  --parameters AmplifyBranchName="$CURRENT_BRANCH"
+export AMPLIFY_GITHUB_APP_ACCESS_TOKEN=your_github_pat
+npm run deploy:github-app
 ```
 
 Useful optional parameters:
@@ -69,5 +74,7 @@ Useful optional parameters:
 - `--parameters AmplifyRepositoryUrl=https://github.com/acabrera04/cs485-calculator-deployed.git`
 - `--parameters AmplifyAppName=cs485-calculator`
 - `--parameters ApiAllowedOrigin=https://your-frontend-domain`
+
+The deploy script derives the current Git branch automatically and passes the token to the CDK `accessToken` field, which AWS documents for new Amplify apps that use the GitHub App. It does not use `OauthToken`.
 
 After deployment, CDK outputs the API endpoint, the Amplify console link, and the public Amplify branch URL.

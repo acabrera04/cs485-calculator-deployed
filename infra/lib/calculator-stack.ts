@@ -21,10 +21,11 @@ export class CalculatorStack extends cdk.Stack {
       description: 'Git branch Amplify should track.',
     })
 
-    const gitHubToken = new cdk.CfnParameter(this, 'AmplifyGitHubToken', {
+    const gitHubAccessToken = new cdk.CfnParameter(this, 'AmplifyGitHubAccessToken', {
       type: 'String',
       noEcho: true,
-      description: 'GitHub personal access token with repo scope for Amplify Hosting.',
+      description:
+        'GitHub personal access token used with the Amplify GitHub App access flow.',
     })
 
     const amplifyAppName = new cdk.CfnParameter(this, 'AmplifyAppName', {
@@ -91,7 +92,7 @@ export class CalculatorStack extends cdk.Stack {
       description: 'Calculator frontend hosted on Amplify.',
       platform: 'WEB',
       repository: repositoryUrl.valueAsString,
-      accessToken: gitHubToken.valueAsString,
+      accessToken: gitHubAccessToken.valueAsString,
       buildSpec: amplifyBuildSpec,
       customRules: [
         {

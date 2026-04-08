@@ -117,6 +117,8 @@ export class CalculatorStack extends cdk.Stack {
     })
     frontendBranch.addDependency(frontendApp)
 
+    const branchHostname = cdk.Fn.join('-', cdk.Fn.split('/', branchName.valueAsString))
+
     new cdk.CfnOutput(this, 'CalculateApiUrl', {
       value: api.urlForPath('/calculate'),
       description: 'Public calculate endpoint used by the frontend.',
@@ -133,7 +135,7 @@ export class CalculatorStack extends cdk.Stack {
     })
 
     new cdk.CfnOutput(this, 'AmplifyBranchUrl', {
-      value: cdk.Fn.join('', ['https://', branchName.valueAsString, '.', frontendApp.attrDefaultDomain]),
+      value: cdk.Fn.join('', ['https://', branchHostname, '.', frontendApp.attrDefaultDomain]),
       description: 'Hosted frontend URL for the selected branch.',
     })
   }

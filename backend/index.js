@@ -3,7 +3,7 @@ const express = require('express')
 const { calculate } = require('./calculate')
 
 const app = express()
-const PORT = 3001
+const PORT = Number(process.env.PORT) || 3001
 
 app.use(cors())
 app.use(express.json())
@@ -18,5 +18,5 @@ app.post('/calculate', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Calculator backend running at http://localhost:${PORT}`)
+  console.log(`Calculator backend running on port ${PORT}`)
 })
